@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: chenmt-rides
+  #Redis
+  redis:
+    host: localhost
+    ## Redis服务器连接端口
+    port: 6379
+    ## 连接超时时间（毫秒）
+    timeout: 60s
+    ## Redis服务器连接密码（默认为空）
+    password: 你的密码
+    ## 连接池中的最大连接数
+    poolMaxTotal: 10
+    ## 连接池中的最大空闲连接
+    poolMaxIdle: 10
+    ## 连接池最大阻塞等待时间（使用负值表示没有限制）
+    poolMaxWait: 3
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/redis_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&zeroDateTimeBehavior=round&useSSL=false
+    username: 你的账号
+    password: 你的密码
+
+server:
+  port: 8099
+
+#mybatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    xyz:
+      chenmt:
+        www:
+          chenmtrides:
+            dao: debug
+
+  config: classpath:logback-spring.xml
+
+swagger:
+  enabled: true
