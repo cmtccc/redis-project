@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @program chenmt-rides
  * @description: redis配置
@@ -27,7 +29,7 @@ public class RedisTemplateService{
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
-    public <T> boolean set(String key ,T value){
+    public <T> boolean set(String key ,T value,Long time){
 
         try {
 
@@ -37,13 +39,46 @@ public class RedisTemplateService{
             if(val==null||val.length()<=0){
                 return false;
             }
-
-            stringRedisTemplate.opsForValue().set(key,val);
+            stringRedisTemplate.opsForValue().set(key,val,time, TimeUnit.SECONDS);
             return true;
         }catch (Exception e){
             return false;
         }
     }
+
+    /**
+    * 功能描述:返回键的时间
+    *
+    * @param  key  键值
+    * @return java.lang.Long
+    * @author 陈猛涛
+    * @date   2020/11/26 10:28
+    */
+    public Long getExpire(String key){
+        try {
+            return stringRedisTemplate.getExpire(key,TimeUnit.SECONDS);
+        }catch (Exception e){
+            return 0l;
+        }
+    }
+
+
+    /**
+    * 功能描述:获取key是否存在
+    *
+    * @param  key   键
+    * @return boolean
+    * @author 陈猛涛
+    * @date   2020/11/26 10:23
+    */
+    public <T> boolean hasKey(String key){
+        try {
+            return stringRedisTemplate.hasKey(key);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public <T> T get(String key,Class<T> clazz){
         try {
             String value = stringRedisTemplate.opsForValue().get(key);

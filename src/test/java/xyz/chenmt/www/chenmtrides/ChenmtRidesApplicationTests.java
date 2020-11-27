@@ -38,7 +38,7 @@ public class ChenmtRidesApplicationTests {
         user.setId(11L);
         user.setUsername("test");
         user.setPassword("hello redis");
-        redisTemplateService.set("key1",user);
+//        redisTemplateService.set("key1",1,user);
 
         User us = redisTemplateService.get("key1",User.class);
         System.out.println(us.getUsername()+":  "+us.getPassword());

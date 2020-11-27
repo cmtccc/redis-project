@@ -21,14 +21,24 @@ public class RedisTestController {
 
 
     @PostMapping("set")
-    public String setRedis(String str){
-        redisTemplateService.set(str,str+System.currentTimeMillis());
+    public String setRedis(String str,Long time){
+        redisTemplateService.set(str,str+System.currentTimeMillis(),time);
         return "保存成功 k为："+str;
     }
 
     @GetMapping("get")
     public String getRedis(String str){
         return str+":"+redisTemplateService.get(str,str.getClass());
+    }
+
+    @GetMapping("hasKey")
+    public Boolean hasKey(String str){
+        return redisTemplateService.hasKey(str);
+    }
+
+    @GetMapping("getExpire")
+    public Long getExpire(String str){
+        return redisTemplateService.getExpire(str);
     }
 
 }
