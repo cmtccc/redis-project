@@ -3,13 +3,13 @@ spring:
     name: chenmt-rides
   #Redis
   redis:
-    host: 192.168.80.93
+    host: localhost
     ## Redis服务器连接端口
     port: 6379
     ## 连接超时时间（毫秒）
     timeout: 60s
     ## Redis服务器连接密码（默认为空）
-#    password: buzhidao.0
+#    password: *
     ## 连接池中的最大连接数
     poolMaxTotal: 10
     ## 连接池中的最大空闲连接
@@ -19,9 +19,9 @@ spring:
 
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.105.52.207:3306/redis_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&zeroDateTimeBehavior=round&useSSL=false
+    url: jdbc:mysql://localhost:3306/redis_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&zeroDateTimeBehavior=round&useSSL=false
     username: root
-    password: Buzhidao.0
+    password: *
 
 server:
   port: 8099
